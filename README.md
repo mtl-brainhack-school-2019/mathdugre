@@ -1,37 +1,35 @@
-# Benchmark for container image size reduction strategies
+# Benchmark of container's image size reduction strategies
 
-Container technology is growing due to its benefit to reproducibility. However, container images are quickly growing in size growing (e.g. FMRIprep). This is problematic since data transfer time is an issue in data-intensive applications.
+Container technologies are growing due to their benefits to reproducibility and deployement. However, The growing size of container's image (e.g. FMRIprep is ~15GB) is problematic since data transfer takes a considerable amount of time in data-intensive applications. We study strategies to reduce data transfer time for container image. As a first appraoch, we aim at minimizing the image size of container with neurodocker and strace. This will help us determine if further effort should be invested to optimise transfer of container's image.
 
-## Aims
-Benchmark containerized data-intensive applications with size after:
-- [ ] Baseline
-- [ ] Neurodocker
-- [ ] custom strace
-
-## Dataset
-corr dataset
-<!-- cite paper or datalad -->
-<!-- decide which subset -->
+## Material and Methods
+### Dataset
+[corr dataset](http://fcon_1000.projects.nitrc.org/indi/CoRR/html/)
 * 1397 subjects
 * 408.4 GB
 * T1, fMRI
 
-## Methods
+TODO:
+- [ ] Selection a subset of subjects
+
 ### BIDS App:
 * example
 * MAGeTbrain
 * FMRIprep
 * ...
 
-### Tools:
-* Baseline
-* Neurodocker
-* strace
-* ...
+### Aproach:
+Benchmark containerized data-intensive applications with size for:
+- [ ] Baseline
+- ~~[ ] Neurodocker (Complete)~~ (Removed due to issues when building container images)
+- [ ] Neurodocker (Whithelist)
+- [ ] Custom script using strace
 
 ### Infrastructure
 
-Dask distirbuted, 10 dedicated 4-cores instances with 15 GB of memory with 10 Gb/s bandwidth network and a 1-core scheduler with 7.5 GB of memory.
+A 1-core scheduler with 7.5GB of memory with the Dask distributed scheduler and 10 dedicated 4-cores workers with 15GB of memory connected by a 10Gb/s network bandwidth.
+
+
 
 ## Future work
-We want to explore new strategies to reduce the data transfer time of container image. 
+We want to explore new scheduling and access strategies to reduce data transfer time of container's image
