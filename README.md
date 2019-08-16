@@ -14,10 +14,10 @@ TODO:
 - [ ] Selection a subset of subjects
 
 ### Tools used:
-* ![Bash](https://tiswww.case.edu/php/chet/img/bash-logo-web.png){:height="100px"}
-* ![Docker](https://cdn.worldvectorlogo.com/logos/docker.svg){:height="100px"}
-* ![Singularity](https://singularity.lbl.gov/images/logo/logo.svg){:height="100px"}
-* ![Dask](https://dask.org/_images/dask_horizontal_white_no_pad.svg){:height="100px"}
+<img alt="Bash" src="https://github.com/mtl-brainhack-school-2019/mathdugre/blob/master/.images/bash.png" height="50px">
+<img alt="Docker" src="https://github.com/mtl-brainhack-school-2019/mathdugre/blob/master/.images/docker.svg" height="50px">
+<img alt="Singularity" src="https://github.com/mtl-brainhack-school-2019/mathdugre/blob/master/.images/singularity.svg" height="50px"> 
+<img alt="Dask" src="https://github.com/mtl-brainhack-school-2019/mathdugre/blob/master/.images/dask.png" height="50px">
 
 ### BIDS App:
 * example
