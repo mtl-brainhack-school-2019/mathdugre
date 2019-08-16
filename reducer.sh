@@ -42,9 +42,9 @@ docker stop tmp
 
 CMD_INSTALL=""
 if [[ $OS = "ubuntu" || $OS = "debian" ]]; then
-    CMD_INSTALL='apt-get install python python-dev python-pip gcc libsqlite3-dev libssl-dev libffi-dev'
+    CMD_INSTALL='apt-get install -y python python-dev python-pip gcc libsqlite3-dev libssl-dev libffi-dev'
 elif [[ $OS = "fedora" || $OS = "centos" ]]; then
-    CMD_INSTALL='yum install python python-devel gcc sqlite-devel openssl-devel libffi-devel'
+    CMD_INSTALL='yum install -y python python-devel gcc sqlite-devel openssl-devel libffi-devel'
 else
     echo "OS is not supported"
     return 1
@@ -55,13 +55,26 @@ cat > Dockerfile << EOF
     
     RUN $PPACKAGE_MANAGE update \
     && $CMD_INSTALL
+
+    RUN pip install -U reprozip
 EOF
 
+docker build -t tmp .
 
 # Run the container
-#$DOCKER_FLAGS="-v $PWD/data:/data -v $PWD/outputs:/outputs -v $PWD/simg/bids-example:/reprozip --name reprozip"
-docker run -itd --entrypoint="bash" --security-opt=seccomp:unconfined $DOCKER_FLAGS --name="reprozip" bids/example
+echo "Retrieving file with reprozip..."
+chmod +x $COMMAND_FILE
+docker run -itd --entrypoint="bash" --security-opt=seccomp:unconfined $DOCKER_FLAGS --name="reprozip" tmp
+docker exec -it reprozip bash -c "cd reprozip; reprozip trace --dont-identify-packages sh $COMMAND_FILE; reprozip pack reduced-img"
+docker stop tmp
+docker image rm tmp
+echo "Reprozip DONE"
 
+reprounzip directory setup reduced-img.rpz reduced-img
 
-
+cat > Dockerfile << EOF
+    FROM $OS:stable
+    
+    COPY reduced-img /
+EOF
 
