@@ -15,6 +15,7 @@ TODO:
 ### Tools used:
 * Docker
 * Singularity
+* Bash
 
 ### BIDS App:
 * example
@@ -25,7 +26,7 @@ TODO:
 ### Aproach:
 * Benchmark containerized data-intensive applications with size for:
     - [ ] Baseline
-    - ~~[ ] Neurodocker (Complete)~~ (Removed due to issues when building container images)
+    - [ ] Neurodocker (Complete)
     - [ ] Neurodocker (Whithelist)
     - [ ] Custom script using strace
 * Convert Docker image with [docker2singularity](https://hub.docker.com/r/singularityware/docker2singularity)
