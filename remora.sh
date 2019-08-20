@@ -67,7 +67,7 @@ echo "Retrieving file with reprozip..."
 cp ${COMMAND_FILE} ./tmp/
 chmod +x ./tmp/${COMMAND_FILE}
 docker run --rm -itd --entrypoint="bash" --security-opt=seccomp:unconfined ${DOCKER_FLAG} -v ${PWD}/tmp:/reprozip --name="reprozip" tmp
-docker exec -it reprozip bash -c "cd reprozip; reprozip trace --dont-identify-packages sh ${COMMAND_FILE}; reprozip pack reduced-img"
+docker exec -it reprozip bash -c "cd reprozip; reprozip trace sh ${COMMAND_FILE}; reprozip pack reduced-img"
 docker stop reprozip
 docker image rm tmp
 
@@ -79,11 +79,10 @@ cd ..
 cat > Dockerfile << EOF
 FROM $OS
     
-COPY tmp/reduced-img/root /img
+COPY tmp/reduced-img/root /
 
-RUN rm -r /img/bids_dataset \
-    && rm -r /img/outputs \
-    && rm -r /img/reprozip
+RUN rm -r /bids_dataset \
+    && rm -r /reprozip
 EOF
 
 echo "DONE"
